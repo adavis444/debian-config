@@ -1,5 +1,15 @@
-## Link Chromebook folders to Linux home directory
+#!/bin/sh
 
+## Clone configuration files from GitHub
+#
+# git clone https://github.com/adavis444/debian-config.git
+#
+# Execute this script:
+# sh ~/debian-config/how-to-set-up-chromebook-linux
+
+
+## Link Chromebook folders to Linux home directory
+#
 # Open Files app
 # For each [My files/Downloads, Google Drive/My Drive, sd]:
 # 	Right click

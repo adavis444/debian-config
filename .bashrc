@@ -25,7 +25,7 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -76,8 +76,6 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    alias ldir='ls -d */'
-    alias ladir='ls -Ap | grep /$'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
 
@@ -92,10 +90,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
-alias lla='ls -lA'
 alias l='ls -CF'
-alias lf='ls -p | grep -v /'
-alias laf='ls -ap | grep -v /'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -116,6 +111,10 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+
+### Customizations ###
+
 
 shopt -s cdspell
 
