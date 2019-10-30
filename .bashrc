@@ -117,26 +117,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-function cd_up() {
-	cd $(printf "%0.s../" $(seq 1 $1));
-}
-alias 'cd..'='cd_up'
-alias ..="cd .."
-alias ..2="cd ../.."
-alias ..3="cd ../../.."
-alias ..4="cd ../../../.."
-alias ..5="cd ../../../../.."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-alias cd...="cd ../.."
-alias cd....="cd ../../.."
-alias cd.....="cd ../../../.."
-alias cd......="cd ../../../../.."
-
-function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
-
 shopt -s cdspell
 
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
@@ -152,16 +132,3 @@ export PATH="$PATH:/usr/share/yarn/bin"
 # Add color to less with pygments
 export LESS='-R'
 export LESSOPEN='|~/.lessfilter %s'
-
-alias py=python
-alias py2=python2
-alias py3=python3
-alias pdb='/usr/bin/env python -m pdb'
-alias pym='python -m'
-alias pyc='python -c'
-alias pys='python3 -m http.server'
-alias jn='jupyter notebook'
-alias gdrive='gdrive-linux-x64'
-alias du1='du -h --max-depth=1'
-alias dus='du -hs'
-alias du0='du -h --max-depth=0'
