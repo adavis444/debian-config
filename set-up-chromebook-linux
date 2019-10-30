@@ -18,9 +18,9 @@ do
 done
 
 ## Link Chromebook folders to Linux home directory
-sudo ln -sf /mnt/chromeos/GoogleDrive/MyDrive "$HOME"
-sudo ln -sf /mnt/chromeos/MyFiles/Downloads "$HOME"
-sudo ln -sf /mnt/chromeos/removable/sd "$HOME"
+sudo ln -sf /mnt/chromeos/GoogleDrive/MyDrive "$HOME/google-drive"
+sudo ln -sf /mnt/chromeos/MyFiles/Downloads "$HOME/downloads"
+sudo ln -sf /mnt/chromeos/removable/sd "$HOME/sd"
 
 ## Install packages from apt
 sudo apt install -y $(cat "$HOME/debian-config/apt-packages" | tr "\n" " ")
