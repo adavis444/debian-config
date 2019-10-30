@@ -124,7 +124,7 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 # the following to ~/.bashrc:
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv virtualenv-init -)"
 
 export PATH="$PATH:/usr/share/yarn/bin"
 

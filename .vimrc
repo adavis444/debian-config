@@ -37,11 +37,11 @@ Plugin 'VundleVim/Vundle.vim'
 " ====
 
 Plugin 'ycm-core/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'indentpython.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-ruby/vim-ruby'
+"Plugin 'rdnetto/YCM-Generator'
+"Plugin 'indentpython.vim'
+"Plugin 'vim-syntastic/syntastic'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'vim-ruby/vim-ruby'
 
 " ====
 " All of your Plugins must be added before the following line
