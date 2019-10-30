@@ -1,0 +1,13 @@
+# Print instance variables (usage "pi classInst")
+alias pi for k in %1.__dict__.keys(): print("%1.",k,"=",%1.__dict__[k])
+# Print instance variables in self
+alias ps pi self
+
+alias nn n;;n
+alias ns n;;s
+alias nnn n;;n;;n
+alias nns n;;n;;s
+alias ss s;;s
+alias sn s;;n
+alias sss s;;s;;s
+alias ssn s;;s;;n
