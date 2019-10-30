@@ -1,0 +1,26 @@
+#!/bin/sh
+
+USER=adavis444
+
+## Clone configuration files from GitHub
+#
+# git clone https://github.com/adavis444/debian-config.git
+#
+# Execute this script:
+# sudo sh "/home/$USER/debian-config/set-up-chromebook-linux"
+
+for f in $(ls -ap "/home/$USER/debian-config/" | grep "^\..*[^/]$")
+do
+	echo $f
+	ln -sf "/home/$USER/debian-config/${f}" "/home/$USER/${f}"
+done
+
+## Link Chromebook folders to Linux home directory
+#
+# Open Files app
+# For each [My files/Downloads, Google Drive/My Drive, sd]:
+# 	Right click
+# 	Share with Linux
+sudo ln -sf /mnt/chromeos/GoogleDrive/MyDrive "/home/$USER/"
+sudo ln -sf /mnt/chromeos/MyFiles/Downloads "/home/$USER/"
+sudo ln -sf /mnt/chromeos/removable/sd "/home/$USER/"
