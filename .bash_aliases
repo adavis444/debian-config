@@ -21,8 +21,8 @@ alias lf='ls -p | grep -v /'
 alias laf='ls -ap | grep -v /'
 
 # cd aliases
-function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
-function cd_up() { cd $(printf "%0.s../" $(seq 1 $1)); }
+function mkdircd { mkdir -p "$@" && eval cd "\"\$$#\""; }
+function cd_up { cd $(printf "%0.s../" $(seq 1 $1)); }
 alias 'cd..'='cd_up'
 alias ..="cd .."
 alias ..2="cd ../.."

@@ -18,9 +18,9 @@ do
 done
 
 ## Link Chromebook folders to Linux home directory
-sudo ln -sf /mnt/chromeos/GoogleDrive/MyDrive "$HOME/"
-sudo ln -sf /mnt/chromeos/MyFiles/Downloads "$HOME/"
-sudo ln -sf /mnt/chromeos/removable/sd "$HOME/"
+sudo ln -sf /mnt/chromeos/GoogleDrive/MyDrive "$HOME"
+sudo ln -sf /mnt/chromeos/MyFiles/Downloads "$HOME"
+sudo ln -sf /mnt/chromeos/removable/sd "$HOME"
 
 ## Install packages from apt
 sudo apt install -y $(cat "$HOME/debian-config/apt-packages" | tr "\n" " ")
@@ -33,23 +33,35 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" \
 sudo apt-get update
 sudo apt install -y nodejs yarn
 
+function gitPullIfExistsElseClone {
+	if [ -d $2 ]; then
+		cd $2
+		git pull $1
+		cd -
+	else
+		git clone $1 $2
+	fi
+}
+
 ## Set up vim with Vundle and YouCompleteMe
-git clone https://github.com/VundleVim/Vundle.vim.git \
+gitPullIfExistsElseClone "https://github.com/VundleVim/Vundle.vim.git" \
 	"$HOME/.vim/bundle/Vundle.vim"
 vim +PluginInstall +qall
 python3 "$HOME/.vim/bundle/YouCompleteMe/install.py" \
 	--clangd-completer --ts-completer --rust-completer
 
 ## Install python and pyenv
-git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
+gitPullIfExistsElseClone "https://github.com/pyenv/pyenv.git" \
+	"$HOME/.pyenv"
 exec "$SHELL"
 pyenv install 3.7.5
 pyenv global 3.7.5
 pip install --upgrade pip numpy pandas requests
 
 ## Install pyenv-virtualenv
-#git clone https://github.com/pyenv/pyenv-virtualenv.git \
+#gitPullIfExistsElseClone "https://github.com/pyenv/pyenv-virtualenv.git" \
 #	"$HOME/.pyenv/plugins/pyenv-virtualenv"
+#
 # Enable the following line in .bashrc:
 #	eval "$(pyenv virtualenv-init -)"
 #exec "$SHELL"
