@@ -11,8 +11,23 @@
 # Execute this script:
 # 	sudo sh "$HOME/debian-config/set-up-chromebook-linux"
 
+sudo apt full-upgrade -y
+sudo apt install -y coreutils sudo git
+function gitPullIfExistsElseClone {
+	if [ -d $2 ]; then
+		cd $2
+		git pull $1
+		cd -
+	else
+		git clone $1 $2
+	fi
+}
+
+gitPullIfExistsElseClone "https://github.com/adavis444/debian-config.git" \
+	"$HOME/debian-config"
+
 ## Overwrite default hidden files with available soft links
-for f in $(ls -ap "$HOME/debian-config/" | grep "^\..*[^/]$")
+for f in $(ls -ap "$HOME/debian-config" | grep "^\..*[^/]$")
 do
 	ln -sf "$HOME/debian-config/$f" "$HOME/$f"
 done
@@ -32,16 +47,6 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" \
 	| sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update
 sudo apt install -y nodejs yarn
-
-function gitPullIfExistsElseClone {
-	if [ -d $2 ]; then
-		cd $2
-		git pull $1
-		cd -
-	else
-		git clone $1 $2
-	fi
-}
 
 ## Set up vim with Vundle and YouCompleteMe
 gitPullIfExistsElseClone "https://github.com/VundleVim/Vundle.vim.git" \
