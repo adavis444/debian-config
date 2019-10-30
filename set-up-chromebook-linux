@@ -22,37 +22,34 @@ sudo ln -sf /mnt/chromeos/GoogleDrive/MyDrive "$HOME/"
 sudo ln -sf /mnt/chromeos/MyFiles/Downloads "$HOME/"
 sudo ln -sf /mnt/chromeos/removable/sd "$HOME/"
 
-## Install node and npm
-curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
-sudo apt install -y nodejs
+## Install packages from apt
+sudo apt install -y $(cat "$HOME/debian-config/apt-packages" | tr "\n" " ")
 
-## Install yarn
+## Install node, npm, & yarn
+curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+echo "deb https://dl.yarnpkg.com/debian/ stable main" \
+	| sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update
-sudo apt install -y yarn
+sudo apt install -y nodejs yarn
 
 ## Set up vim with Vundle and YouCompleteMe
-sudo apt install -y vim-nox
-git clone https://github.com/VundleVim/Vundle.vim.git "$HOME/.vim/bundle/Vundle.vim"
+git clone https://github.com/VundleVim/Vundle.vim.git \
+	"$HOME/.vim/bundle/Vundle.vim"
 vim +PluginInstall +qall
-sudo apt install -y build-essential cmake python3-dev
-python3 "$HOME/.vim/bundle/YouCompleteMe/install.py" --clangd-completer --ts-completer --rust-completer
+python3 "$HOME/.vim/bundle/YouCompleteMe/install.py" \
+	--clangd-completer --ts-completer --rust-completer
 
 ## Install python and pyenv
-sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 git clone https://github.com/pyenv/pyenv.git "$HOME/.pyenv"
 exec "$SHELL"
 pyenv install 3.7.5
 pyenv global 3.7.5
-pip install --upgrade pip
-pip install numpy pandas requests
+pip install --upgrade pip numpy pandas requests
 
 ## Install pyenv-virtualenv
-#git clone https://github.com/pyenv/pyenv-virtualenv.git "$HOME/.pyenv/plugins/pyenv-virtualenv"
+#git clone https://github.com/pyenv/pyenv-virtualenv.git \
+#	"$HOME/.pyenv/plugins/pyenv-virtualenv"
 # Enable the following line in .bashrc:
-# eval "$(pyenv virtualenv-init -)"
+#	eval "$(pyenv virtualenv-init -)"
 #exec "$SHELL"
-
-## Unrelated
-sudo apt install -y lsb-release
