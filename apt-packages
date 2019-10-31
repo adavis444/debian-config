@@ -20,3 +20,5 @@ vim-nox
 cmake
 python3-dev
 lsb-release
+gcc
+g++
