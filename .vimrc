@@ -37,11 +37,11 @@ Plugin 'VundleVim/Vundle.vim'
 " ====
 
 Plugin 'ycm-core/YouCompleteMe'
-"Plugin 'rdnetto/YCM-Generator'
-"Plugin 'indentpython.vim'
-"Plugin 'vim-syntastic/syntastic'
-"Plugin 'scrooloose/nerdtree'
-"Plugin 'vim-ruby/vim-ruby'
+Plugin 'indentpython.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'rust-lang/rust.vim'
+Plugin 'vim-ruby/vim-ruby'
 
 " ====
 " All of your Plugins must be added before the following line
@@ -87,7 +87,6 @@ noremap <CR> o<Esc>
 " YouCompleteMe customizations
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_max_num_candidates = 10
-let g:ycm_global_ycm_extra_conf = ".vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 
 " GoToDefinition shortcut
 noremap \g :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -112,7 +111,13 @@ autocmd BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix
 
-autocmd BufNewFile,BufRead *.js, *.html, *.css
+autocmd BufNewFile,BufRead *.rs,*.c,*.cpp,*.h,*.rb
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set autoindent
+
+autocmd BufNewFile,BufRead *.js,*.html,*.css
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
