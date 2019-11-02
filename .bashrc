@@ -115,7 +115,7 @@ fi
 
 ### Customizations ###
 
-
+set -o vi
 shopt -s cdspell
 
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
