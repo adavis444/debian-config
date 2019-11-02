@@ -13,6 +13,7 @@
 
 sudo apt full-upgrade -y
 sudo apt install -y coreutils sudo git
+
 function gitPullIfExistsElseClone {
 	if [ -d $2 ]; then
 		cd $2
@@ -27,15 +28,23 @@ gitPullIfExistsElseClone "https://github.com/adavis444/debian-config.git" \
 	"$HOME/debian-config"
 
 ## Overwrite default hidden files with available soft links
-for f in $(ls -ap "$HOME/debian-config" | grep "^\..*[^/]$")
+for f in $(ls -A "$HOME/debian-config" | grep "^\.")
 do
-	ln -sf "$HOME/debian-config/$f" "$HOME/$f"
+	if [ -f "$HOME/debian-config/$f" ]; then
+		ln -sf "$HOME/debian-config/$f" "$HOME/$f"
+	fi
 done
 
 ## Link Chromebook folders to Linux home directory
-sudo ln -sf /mnt/chromeos/GoogleDrive/MyDrive "$HOME/google-drive"
-sudo ln -sf /mnt/chromeos/MyFiles/Downloads "$HOME/downloads"
-sudo ln -sf /mnt/chromeos/removable/sd "$HOME/sd"
+function createSymlinkFromMnt {
+	if [ -d $1 ] && [ ! -L $2 ]; then
+		sudo ln -s $1 $2
+	fi
+}
+
+createSymlinkFromMnt /mnt/chromeos/GoogleDrive/MyDrive "$HOME/google-drive"
+createSymlinkFromMnt /mnt/chromeos/MyFiles/Downloads "$HOME/downloads"
+createSymlinkFromMnt /mnt/chromeos/removable/sd "$HOME/sd"
 
 ## Install packages from apt
 sudo apt install -y $(cat "$HOME/debian-config/apt-packages" | tr "\n" " ")
