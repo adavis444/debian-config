@@ -14,7 +14,7 @@
 sudo apt full-upgrade -y
 sudo apt install -y coreutils sudo git
 
-function gitPullIfExistsElseClone {
+gitPullIfExistsElseClone() {
 	if [ -d $2 ]; then
 		cd $2
 		git pull $1
@@ -36,7 +36,7 @@ do
 done
 
 ## Link Chromebook folders to Linux home directory
-function createSymlinkFromMnt {
+createSymlinkFromMnt() {
 	if [ -d $1 ] && [ ! -L $2 ]; then
 		sudo ln -s $1 $2
 	fi
