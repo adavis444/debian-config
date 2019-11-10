@@ -16,4 +16,4 @@ pip install --upgrade pip numpy pandas requests
 # Enable the following line in .bashrc:
 #	eval "$(pyenv virtualenv-init -)"
 
-exec "$SHELL"
+source .bashrc

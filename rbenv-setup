@@ -17,4 +17,4 @@ rbenv global 2.6.5
 
 gem install rails
 
-exec $SHELL
+source .bashrc
