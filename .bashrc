@@ -124,15 +124,15 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 # the following to ~/.bashrc:
 if [ -d $HOME/.pyenv/bin ]; then
 	export PATH=$HOME/.pyenv/bin:$PATH
-	eval $(pyenv init -)
+	eval "$(pyenv init -)"
 	if command -v pyenv virtualenv-init >/dev/null 2>&1; then
-		eval $(pyenv virtualenv-init -)
+		eval "$(pyenv virtualenv-init -)"
 	fi
 fi
 
 if [ -d $HOME/.rbenv/bin ]; then
 	export PATH=$HOME/.rbenv/bin:$PATH
-	eval $(rbenv init)
+	eval "$(rbenv init -)"
 fi
 
 if [ -d /usr/share/yarn/bin ]; then
