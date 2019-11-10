@@ -35,14 +35,6 @@ createSymlinkFromMnt /mnt/chromeos/removable/sd $HOME/sd
 ## Install packages from apt
 sudo apt install -y $(cat $HOME/debian-config/apt-packages | tr "\n" " ")
 
-## Install node, npm, & yarn
-curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
-curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" \
-	| sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update
-sudo apt install -y nodejs yarn
-
 ## Set up Vundle
 gitPullIfExistsElseClone https://github.com/VundleVim/Vundle.vim.git \
 	$HOME/.vim/bundle/Vundle.vim
