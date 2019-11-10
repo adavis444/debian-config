@@ -31,12 +31,12 @@ shopt -s globstar
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+if [ -z ${debian_chroot:-} ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
+case $TERM in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
@@ -45,7 +45,7 @@ esac
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
+if [ -n $force_color_prompt ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 	# We have color support; assume it's compliant with Ecma-48
 	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
@@ -56,7 +56,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
+if [ $color_prompt = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -64,7 +64,7 @@ fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
+case $TERM in
 xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
@@ -122,11 +122,22 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
 # Load pyenv automatically by adding
 # the following to ~/.bashrc:
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
+if [ -d $HOME/.pyenv/bin ]; then
+	export PATH=$HOME/.pyenv/bin:$PATH
+	eval $(pyenv init -)
+	if command -v pyenv virtualenv-init >/dev/null 2>&1; then
+		eval $(pyenv virtualenv-init -)
+	fi
+fi
 
-export PATH="$PATH:/usr/share/yarn/bin"
+if [ -d $HOME/.rbenv/bin ]; then
+	export PATH=$HOME/.rbenv/bin:$PATH
+	eval $(rbenv init)
+fi
+
+if [ -d /usr/share/yarn/bin ]; then
+	export PATH=$PATH:/usr/share/yarn/bin
+fi
 
 # Add color to less with pygments
 export LESS='-R'

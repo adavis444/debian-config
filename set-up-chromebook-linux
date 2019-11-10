@@ -9,32 +9,31 @@
 ## Clone configuration files from GitHub
 # 	git clone https://github.com/adavis444/debian-config.git
 # Execute this script:
-# 	sudo sh "$HOME/debian-config/set-up-chromebook-linux"
+# 	bash $HOME/debian-config/set-up-chromebook-linux
 
-source git_pull_if_exists_else_clone.sh
-source create_symlink_from_mnt.sh
+source $HOME/debian-config/git_pull_if_exists_else_clone.sh
+source $HOME/debian-config/create_symlink_from_mnt.sh
 
 sudo apt full-upgrade -y
 sudo apt install -y coreutils sudo git
 
-gitPullIfExistsElseClone "https://github.com/adavis444/debian-config.git" \
-	"$HOME/debian-config"
+gitPullIfExistsElseClone https://github.com/adavis444/debian-config.git \
+	$HOME/debian-config
 
 ## Overwrite default hidden files with available soft links
-for f in $(ls -A "$HOME/debian-config" | grep "^\.")
-do
-	if [ -f "$HOME/debian-config/$f" ]; then
-		ln -sf "$HOME/debian-config/$f" "$HOME/$f"
+for f in $(ls -A $HOME/debian-config | grep "^\."); do
+	if [ -f $HOME/debian-config/$f ]; then
+		ln -sf $HOME/debian-config/$f $HOME/$f
 	fi
 done
 
 ## Link Chromebook folders to Linux home directory
-createSymlinkFromMnt /mnt/chromeos/GoogleDrive/MyDrive "$HOME/google-drive"
-createSymlinkFromMnt /mnt/chromeos/MyFiles/Downloads "$HOME/downloads"
-createSymlinkFromMnt /mnt/chromeos/removable/sd "$HOME/sd"
+createSymlinkFromMnt /mnt/chromeos/GoogleDrive/MyDrive $HOME/google-drive
+createSymlinkFromMnt /mnt/chromeos/MyFiles/Downloads $HOME/downloads
+createSymlinkFromMnt /mnt/chromeos/removable/sd $HOME/sd
 
 ## Install packages from apt
-sudo apt install -y $(cat "$HOME/debian-config/apt-packages" | tr "\n" " ")
+sudo apt install -y $(cat $HOME/debian-config/apt-packages | tr "\n" " ")
 
 ## Install node, npm, & yarn
 curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
@@ -45,8 +44,8 @@ sudo apt-get update
 sudo apt install -y nodejs yarn
 
 ## Set up vim with Vundle and YouCompleteMe
-gitPullIfExistsElseClone "https://github.com/VundleVim/Vundle.vim.git" \
-	"$HOME/.vim/bundle/Vundle.vim"
+gitPullIfExistsElseClone https://github.com/VundleVim/Vundle.vim.git \
+	$HOME/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
-python3 "$HOME/.vim/bundle/YouCompleteMe/install.py" \
+python3 $HOME/.vim/bundle/YouCompleteMe/install.py \
 	--clangd-completer --ts-completer --rust-completer
