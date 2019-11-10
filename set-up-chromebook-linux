@@ -11,8 +11,12 @@
 # Execute this script:
 # 	bash $HOME/debian-config/set-up-chromebook-linux
 
+if [ ! -f $HOME/debian-config/git_pull_if_exists_else_clone.sh ]; then
+	git clone https://github.com/adavis444/debian-config.git \
+		$HOME/debian-config
+fi
+
 source $HOME/debian-config/git_pull_if_exists_else_clone.sh
-source $HOME/debian-config/create_symlink_from_mnt.sh
 
 sudo apt full-upgrade -y
 sudo apt install -y coreutils sudo git
@@ -26,6 +30,8 @@ for f in $(ls -A $HOME/debian-config | grep "^\."); do
 		ln -sf $HOME/debian-config/$f $HOME/$f
 	fi
 done
+
+source $HOME/debian-config/create_symlink_from_mnt.sh
 
 ## Link Chromebook folders to Linux home directory
 createSymlinkFromMnt /mnt/chromeos/GoogleDrive/MyDrive $HOME/google-drive
