@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Install Vim plugins listed in .vimrc using Vundle
+vim +PluginInstall +qall
+
+# Install YouCompleteMe
+if [ -e $HOME/.vim/bundle/YouCompleteMe/install.py ]; then
+	python3 $HOME/.vim/bundle/YouCompleteMe/install.py \
+		--clangd-completer --ts-completer --rust-completer
+fi
