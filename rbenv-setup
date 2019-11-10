@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source git_pull_if_exists_else_clone.sh
+
+gitPullIfExistsElseClone https://github.com/rbenv/rbenv.git $HOME/.rbenv
+if ! command -v rbenv >/dev/null 2>&1; then
+	cd ~/.rbenv && src/configure && make -C src
+	cd - >/dev/null
+fi
+
+mkdir -p $HOME/.rbenv/plugins
+gitPullIfExistsElseClone https://github.com/rbenv/ruby-build.git \
+	$HOME/.rbenv/plugins/ruby-build
+
+rbenv install 2.6.5
+rbenv global 2.6.5
+
+gem install rails
+
+exec $SHELL
