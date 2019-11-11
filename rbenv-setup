@@ -3,18 +3,20 @@
 source git_pull_if_exists_else_clone.sh
 
 gitPullIfExistsElseClone https://github.com/rbenv/rbenv.git $HOME/.rbenv
-if ! command -v rbenv >/dev/null 2>&1; then
-	cd ~/.rbenv && src/configure && make -C src
-	cd - >/dev/null
-fi
+cd ~/.rbenv && src/configure && make -C src
+cd - >/dev/null
 
 mkdir -p $HOME/.rbenv/plugins
 gitPullIfExistsElseClone https://github.com/rbenv/ruby-build.git \
 	$HOME/.rbenv/plugins/ruby-build
 
-source .bashrc
+if [[ ":$PATH:" != *":$HOME/.rbenv/bin:"* ]]; then
+	export PATH=$HOME/.rbenv/bin:$PATH
+fi
 
-rbenv install 2.6.5
+eval "$(rbenv init -)"
+
+rbenv install 2.6.5 --skip-existing
 rbenv global 2.6.5
 
 gem install rails
