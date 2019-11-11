@@ -7,7 +7,7 @@ gitPullIfExistsElseClone "https://github.com/pyenv/pyenv.git" \
 	"$HOME/.pyenv"
 pyenv install 3.7.5
 pyenv global 3.7.5
-pip install --upgrade pip numpy pandas requests
+pip install --upgrade pip numpy pandas requests jupyter
 
 ## Install pyenv-virtualenv
 #gitPullIfExistsElseClone "https://github.com/pyenv/pyenv-virtualenv.git" \
