@@ -3,17 +3,18 @@
 source git_pull_if_exists_else_clone.sh
 
 ## Install python and pyenv
-gitPullIfExistsElseClone "https://github.com/pyenv/pyenv.git" \
-	"$HOME/.pyenv"
+gitPullIfExistsElseClone https://github.com/pyenv/pyenv.git \
+	$HOME/.pyenv
+source $HOME/.bashrc
+
 pyenv install 3.7.5
 pyenv global 3.7.5
 pip install --upgrade pip numpy pandas requests jupyter
 
 ## Install pyenv-virtualenv
-#gitPullIfExistsElseClone "https://github.com/pyenv/pyenv-virtualenv.git" \
-#	"$HOME/.pyenv/plugins/pyenv-virtualenv"
+#gitPullIfExistsElseClone https://github.com/pyenv/pyenv-virtualenv.git \
+#	$HOME/.pyenv/plugins/pyenv-virtualenv
 #
 # Enable the following line in .bashrc:
 #	eval "$(pyenv virtualenv-init -)"
-
-source .bashrc
+#source $HOME/.bashrc

@@ -12,9 +12,9 @@ mkdir -p $HOME/.rbenv/plugins
 gitPullIfExistsElseClone https://github.com/rbenv/ruby-build.git \
 	$HOME/.rbenv/plugins/ruby-build
 
+source .bashrc
+
 rbenv install 2.6.5
 rbenv global 2.6.5
 
 gem install rails
-
-source .bashrc
