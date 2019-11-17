@@ -13,9 +13,9 @@ eval "$(pyenv init -)"
 
 pyenv install 3.7.5 --skip-existing
 pyenv global 3.7.5
-pip install --upgrade pip numpy pandas requests jupyter
+#pip install --upgrade pip numpy pandas requests jupyter
 
 ## Install pyenv-virtualenv
-#gitPullIfExistsElseClone https://github.com/pyenv/pyenv-virtualenv.git \
-#	$HOME/.pyenv/plugins/pyenv-virtualenv
-#eval "$(pyenv virtualenv-init -)"
+gitPullIfExistsElseClone https://github.com/pyenv/pyenv-virtualenv.git \
+	$HOME/.pyenv/plugins/pyenv-virtualenv
+eval "$(pyenv virtualenv-init -)"
