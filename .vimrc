@@ -40,8 +40,6 @@ Plugin 'ycm-core/YouCompleteMe'
 Plugin 'indentpython.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'rust-lang/rust.vim'
-Plugin 'vim-ruby/vim-ruby'
 
 " ====
 " All of your Plugins must be added before the following line
